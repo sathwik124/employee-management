@@ -2,8 +2,7 @@
 
 {% load crispy_forms_tags %} 
 {% block content %}
-<span id="hello-msg">Hello, <h3>{{request.user}}</h3> </span>
-<span><a href="{% url 'logout' %}">logout</a></span>
+
 <form action="" method="post" autocomplete="off">
     {%csrf_token%}
     {{form.fullname|as_crispy_field}}
