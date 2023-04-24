@@ -6,9 +6,12 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
-from .decoraters import unauthenticated_user
+from django.contrib.auth.models import Group
+from .decoraters import unauthenticated_user,allowed_users,admin_only
 # Create your views here.
 @login_required(login_url='/employee/login')
+@allowed_users(allowed_roles=['admin'])
+@admin_only
 def employee_list(request):
     emplist = Employee.objects.all()
     myFilter = OrderFilter(request.GET,queryset=emplist)
@@ -17,6 +20,8 @@ def employee_list(request):
     return render(request,"employee_register/employee_list.html",context)
 
 @login_required(login_url='/employee/login')
+
+@admin_only
 def employee_form(request,id=0):
     if request.method == "GET":
        if id==0:
@@ -36,6 +41,7 @@ def employee_form(request,id=0):
         return redirect('/employee/list')    
 
 @login_required(login_url='/employee/login')
+@allowed_users(allowed_roles=['admin'])
 def employee_delete(request,id):
     employee=Employee.objects.get(pk=id)
     employee.delete()
@@ -69,10 +75,17 @@ def registerPage(request):
     if request.method == 'POST':
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request,'Account has been created for ' + user)
+            user = form.save()
+            username = form.cleaned_data.get('username')
+
+            group = Group.objects.get(name='employees')
+            user.groups.add(group)
+            
+            messages.success(request,'Account has been created for ' + username)
 
             return redirect('/employee/login')
     context = {'form':form}
     return render(request, "employee_register/register.html", context)
+@login_required(login_url='/employee/login')
+def userPage(request):
+    return render(request,"employee_register/user.html")
