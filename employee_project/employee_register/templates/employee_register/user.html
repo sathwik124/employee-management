@@ -1,4 +1,6 @@
-{% extends "employee_register/base.html" %}
-{% block content %}
-<h1>hello mowa</h1>
+{% extends "employee_register/base1.html" %} 
+{% block title %}Home{% endblock %}
+{% block user %}active{% endblock %}
+{% block content %} 
+<h3>hello {{request.user}} :)</h3>
 {% endblock content %}

@@ -89,3 +89,6 @@ def registerPage(request):
 @login_required(login_url='/employee/login')
 def userPage(request):
     return render(request,"employee_register/user.html")
+
+def profilePage(request):
+    return render(request,"employee_register/profile.html")
