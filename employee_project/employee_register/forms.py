@@ -17,7 +17,9 @@ class Employeeform(forms.ModelForm):
         super(Employeeform,self).__init__(*args,**kwargs)
         self.fields['position'].empty_label = "Select"
         self.fields['emp_code'].required=False
-
+        self.fields['user'].required = False
+        self.fields['profile_pic'].required = False
+        self.fields['manager'].required = False
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User

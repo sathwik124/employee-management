@@ -94,7 +94,13 @@ def userPage(request):
 @login_required(login_url='/employee/login')
 @allowed_users('employees')
 def profilePage(request):
-    context = {}
+    emp = request.user.employee
+    form = Employeeform(instance = emp)
+    if request.method == 'POST':
+        form=Employeeform(request.POST,request.FILES,instance = emp)
+    if form.is_valid():
+        form.save()
+    context = {'form':form,'emp':emp}
     return render(request,"employee_register/profile.html",context)
 
 def errorPage(request):
