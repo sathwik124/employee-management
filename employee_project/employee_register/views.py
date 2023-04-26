@@ -87,12 +87,17 @@ def registerPage(request):
     context = {'form':form}
     return render(request, "employee_register/register.html", context)
 @login_required(login_url='/employee/login')
+@allowed_users('employees')
 def userPage(request):
     return render(request,"employee_register/user.html")
 
 @login_required(login_url='/employee/login')
+@allowed_users('employees')
 def profilePage(request):
-    return render(request,"employee_register/profile.html")
+    context = {}
+    return render(request,"employee_register/profile.html",context)
 
 def errorPage(request):
-    return render(request,"employee_register/error.html")
+    group = request.user.groups.all()[0].name
+    context = {'group':group}
+    return render(request,"employee_register/error.html",context)

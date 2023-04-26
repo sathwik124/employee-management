@@ -2,5 +2,16 @@
 {% block title %}Profile{% endblock %}
 {% block profile %}active{% endblock %}
 {% block content %} 
-<h1>hello {{request.user}} :)</h1>
+<div class="card" style="width: 18rem; display: flex;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h2 class="card-title">Hello {{request.user}} :)</h2>
+      <p class="card-text"><h3>hahahah</h3></p>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">An item</li>
+      <li class="list-group-item">A second item</li>
+      <li class="list-group-item">A third item</li>
+    </ul>
+</div>
 {% endblock content %} 
