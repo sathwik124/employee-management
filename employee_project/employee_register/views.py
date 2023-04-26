@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .forms import Employeeform,CreateUserForm
+from .forms import Employeeform,CreateUserForm,ProfileForm
 from .models import Employee
 from .filters import OrderFilter
 from django.contrib.auth.forms import UserCreationForm
@@ -95,9 +95,9 @@ def userPage(request):
 @allowed_users('employees')
 def profilePage(request):
     emp = request.user.employee
-    form = Employeeform(instance = emp)
+    form = ProfileForm(instance=emp)
     if request.method == 'POST':
-        form=Employeeform(request.POST,request.FILES,instance = emp)
+        form=ProfileForm(request.POST,request.FILES,instance = emp)
     if form.is_valid():
         form.save()
     context = {'form':form,'emp':emp}

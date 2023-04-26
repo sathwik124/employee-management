@@ -7,7 +7,7 @@ class Employeeform(forms.ModelForm):
 
     class Meta:
         model=Employee
-        fields='__all__'
+        exclude = ["profile_pic","user"]
         labels= {
             'fullname':'Full Name',
             'emp_code':'EMP. Code'
@@ -17,10 +17,17 @@ class Employeeform(forms.ModelForm):
         super(Employeeform,self).__init__(*args,**kwargs)
         self.fields['position'].empty_label = "Select"
         self.fields['emp_code'].required=False
-        self.fields['user'].required = False
-        self.fields['profile_pic'].required = False
-        self.fields['manager'].required = False
+
 class CreateUserForm(UserCreationForm):
     class Meta:
         model = User
         fields = ['username','email','password1','password2']
+
+class ProfileForm(forms.ModelForm):
+
+    class Meta:
+        model=Employee
+        fields = ['fullname','mobile','profile_pic']
+        def __init__(self,*args,**kwargs):
+            super(Employeeform,self).__init__(*args,**kwargs)
+            self.fields['profile_pic'].required = False
