@@ -8,6 +8,8 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from .decoraters import unauthenticated_user,allowed_users,admin_only
+from django.conf import settings
+from django.core.files.storage import default_storage
 # Create your views here.
 @login_required(login_url='/employee/login')
 @allowed_users(allowed_roles=['admin'])

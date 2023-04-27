@@ -16,6 +16,6 @@ class Employee(models.Model):
     mobile = models.CharField(max_length=15)
     position = models.ForeignKey(Position,on_delete=models.CASCADE)
     manager = models.ForeignKey('self',on_delete=models.CASCADE,default=2)
-    profile_pic = models.ImageField(null=True,blank=True)
+    profile_pic = models.ImageField(default = "default.png",null=True,blank=True)
     def __str__(self):
         return self.fullname
