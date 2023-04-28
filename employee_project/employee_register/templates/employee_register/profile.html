@@ -11,9 +11,15 @@
             <div class="card-body p-4">
               <div class="d-flex text-black">
                 <div class="flex-shrink-0">
-                  <img src="{{emp.profile_pic.url}}"
+                  {% if emp.profile_pic %}
+                    <img src="{{emp.profile_pic.url}}"
+                      alt="Generic placeholder image" class="img-fluid"
+                      style="width: 180px; border-radius: 10px;">
+                  {% else %}
+                    <img src="http://127.0.0.1:8000/media/def/default.png"
                     alt="Generic placeholder image" class="img-fluid"
                     style="width: 180px; border-radius: 10px;">
+                  {% endif %} 
                 </div>
                 <div class="flex-grow-1 ms-3">
                   <h5 class="mb-1">{{request.user}}</h5>
