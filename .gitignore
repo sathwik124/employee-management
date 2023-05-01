@@ -1,6 +1,6 @@
 kenv
 media
-api/__pycache__
-api2/__pycache__
-employee_project/__pycache__
-employee_register/__pycache__
+employee_project/api/__pycache__
+employee_project/api2/__pycache__
+employee_project/employee_project/__pycache__
+employee_project/employee_register/__pycache__
